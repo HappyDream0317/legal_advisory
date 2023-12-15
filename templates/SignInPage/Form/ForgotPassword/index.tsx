@@ -23,7 +23,7 @@ const ForgotPassword = ({ onClick }: ForgotPasswordProps) => {
       });
       const data = await response.json();
       if (response.ok) {
-        toast.success("Reset password link was uccessfully sent.");
+        toast.success("Reset password link was successfully sent.");
       } else {
         toast.error(data.error);
       }
