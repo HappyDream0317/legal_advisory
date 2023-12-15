@@ -28,8 +28,6 @@ const CreateAccount = ({ handleTabChange }: CreateAccountProps) => {
       });
       const data = await response.json();
       if (response.ok) {
-        console.log("Account created successfully");
-        // toast.success("Register Successed! Please login again.");
         localStorage.setItem("email", email);
         window.location.href = "/verify-email";
         // handleTabChange(0);
