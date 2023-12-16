@@ -7,22 +7,35 @@ type ProfileProps = {
 };
 
 const Profile = ({ visible }: ProfileProps) => {
-  const [userName, setUserNAme] = useState<string>("");
+  const [userName, setUserName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
 
-  // useEffect(() => {
-  //   var jwt_token = localStorage.getItem("jwt_token");
-  //   const preLoad = async () => {
-  //     const response = await fetch("/api/getUser", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-  //   };
-
-  //   preLoad();
-  // }, []);
+  useEffect(() => {
+    var jwt_token = localStorage.getItem("jwt_token");
+    if(jwt_token) {
+      fetch("/api/user/get-inf", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ token: jwt_token }),
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          if (response.ok) {
+            setUserName(data.data.name);
+            setEmail(data.data.email);
+          } else {
+            location.href = "/";
+          }
+        })
+        .catch((error) => {
+          location.href = "/";
+        });
+    } else {
+      location.href = "/";
+    }
+  }, []);
 
   return (
     <div
@@ -36,7 +49,7 @@ const Profile = ({ visible }: ProfileProps) => {
             visible ? "justify-center" : "px-2.5 py-2.5 pb-4.5"
           }`}
         >
-          <div className="relative w-10 h-10">
+          {/* <div className="relative w-10 h-10">
             <Image
               className="rounded-full object-cover"
               src="/images/avatar.jpg"
@@ -44,15 +57,15 @@ const Profile = ({ visible }: ProfileProps) => {
               alt="Avatar"
             />
             <div className="absolute -right-0.75 -bottom-0.75 w-4.5 h-4.5 bg-primary-2 rounded-full border-4 border-n-6"></div>
-          </div>
+          </div> */}
           {!visible && (
             <>
               <div className="ml-4 mr-4">
                 <div className="base2 font-semibold text-n-1">
-                  Tran Mau Tri Tam
+                  {userName}
                 </div>
                 <div className="caption1 font-semibold text-n-3/50">
-                  tam@ui8.net
+                  {email}
                 </div>
               </div>
               <div className="shrnik-0 ml-auto self-start px-3 bg-primary-2 rounded-lg caption1 font-bold text-n-7">
