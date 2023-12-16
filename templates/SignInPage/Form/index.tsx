@@ -7,6 +7,8 @@ import SignIn from "./SignIn";
 import CreateAccount from "./CreateAccount";
 import ForgotPassword from "./ForgotPassword";
 
+import { useSession, signIn, signOut } from "next-auth/react";
+
 const tabNav = ["Sign in", "Create account"];
 
 type FormProps = {};
@@ -23,6 +25,8 @@ const Form = ({}: FormProps) => {
     console.log("tab", tab);
     setActiveTab(tab);
   };
+
+  const { data: session } = useSession();
 
   return (
     <div className="w-full max-w-[31.5rem] m-auto">
@@ -47,10 +51,29 @@ const Form = ({}: FormProps) => {
                 </Tab>
               ))}
             </Tab.List>
-            <button className="btn-stroke-light btn-large w-full mb-3">
-              <Image src="/images/google.svg" width={24} height={24} alt="" />
-              <span className="ml-4">Continue with Google</span>
-            </button>
+
+            {session ? (
+              <>
+                <p className="text-center">
+                  Signed in as {session?.user?.email}{" "}
+                </p>
+                <button
+                  className="btn-stroke-light btn-large w-full mb-3"
+                  onClick={() => signOut()}
+                >
+                  <span className="ml-4">Sign Out</span>
+                </button>
+              </>
+            ) : (
+              <button
+                className="btn-stroke-light btn-large w-full mb-3"
+                onClick={() => signIn("google")}
+              >
+                <Image src="/images/google.svg" width={24} height={24} alt="" />
+                <span className="ml-4">Continue with Google</span>
+              </button>
+            )}
+
             {/* <button className="btn-stroke-light btn-large w-full">
               <Image src="/images/apple.svg" width={24} height={24} alt="" />
               <span className="ml-4">Continue with Apple</span>

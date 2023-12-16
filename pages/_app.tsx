@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Inter, Karla } from "next/font/google";
 import { ColorModeScript, ColorModeProvider } from "@chakra-ui/color-mode";
+import { SessionProvider } from "next-auth/react";
 
 const inter = Inter({
   weight: ["500", "600", "700"],
@@ -20,7 +21,10 @@ const karla = Karla({
   variable: "--font-karla",
 });
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) {
   return (
     <main className={`${karla.variable} ${inter.variable} font-sans`}>
       <style jsx global>{`
@@ -38,7 +42,9 @@ export default function App({ Component, pageProps }: AppProps) {
           key="chakra-ui-no-flash"
           storageKey="chakra-ui-color-mode"
         />
-        <Component {...pageProps} />
+        <SessionProvider session={session}>
+          <Component {...pageProps} />
+        </SessionProvider>
         <Toaster
           containerStyle={{
             bottom: 40,
