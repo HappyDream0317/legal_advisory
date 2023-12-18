@@ -3,7 +3,6 @@ import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { cookies } from "next/headers";
 
 dotenv.config();
 

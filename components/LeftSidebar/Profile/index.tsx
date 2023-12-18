@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "@/components/Image";
 
+import { useSession, signIn, signOut } from "next-auth/react";
+
 type ProfileProps = {
   visible?: boolean;
 };
@@ -12,7 +14,7 @@ const Profile = ({ visible }: ProfileProps) => {
 
   useEffect(() => {
     var jwt_token = localStorage.getItem("jwt_token");
-    if(jwt_token) {
+    if (jwt_token) {
       fetch("/api/user/get-inf", {
         method: "POST",
         headers: {
@@ -36,6 +38,12 @@ const Profile = ({ visible }: ProfileProps) => {
       location.href = "/";
     }
   }, []);
+
+  const logOut = () => {
+    signOut();
+    localStorage.removeItem('email');
+    localStorage.removeItem('jwt_token');
+  }
 
   return (
     <div
@@ -61,9 +69,7 @@ const Profile = ({ visible }: ProfileProps) => {
           {!visible && (
             <>
               <div className="ml-4 mr-4">
-                <div className="base2 font-semibold text-n-1">
-                  {userName}
-                </div>
+                <div className="base2 font-semibold text-n-1">{userName}</div>
                 <div className="caption1 font-semibold text-n-3/50">
                   {email}
                 </div>
@@ -79,6 +85,9 @@ const Profile = ({ visible }: ProfileProps) => {
             Upgraded to Pro
           </Link>
         )}
+        <button onClick={logOut} className="btn-stroke-dark w-full mt-2">
+          Sign out
+        </button>
       </div>
     </div>
   );

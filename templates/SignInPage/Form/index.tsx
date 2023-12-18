@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Tab } from "@headlessui/react";
 import { useColorMode } from "@chakra-ui/color-mode";
 import Logo from "@/components/Logo";
@@ -27,6 +27,13 @@ const Form = ({}: FormProps) => {
   };
 
   const { data: session } = useSession();
+  if (session) {
+    if (session.success === true) {
+      localStorage.setItem("jwt_token", session.jwtToken);
+      localStorage.setItem("email", session.email);
+      window.location.href = "/updates-and-faq";
+    }
+  }
 
   return (
     <div className="w-full max-w-[31.5rem] m-auto">
@@ -51,29 +58,13 @@ const Form = ({}: FormProps) => {
                 </Tab>
               ))}
             </Tab.List>
-
-            {session ? (
-              <>
-                <p className="text-center">
-                  Signed in as {session?.user?.email}{" "}
-                </p>
-                <button
-                  className="btn-stroke-light btn-large w-full mb-3"
-                  onClick={() => signOut()}
-                >
-                  <span className="ml-4">Sign Out</span>
-                </button>
-              </>
-            ) : (
-              <button
-                className="btn-stroke-light btn-large w-full mb-3"
-                onClick={() => signIn("google")}
-              >
-                <Image src="/images/google.svg" width={24} height={24} alt="" />
-                <span className="ml-4">Continue with Google</span>
-              </button>
-            )}
-
+            <button
+              className="btn-stroke-light btn-large w-full mb-3"
+              onClick={() => signIn("google")}
+            >
+              <Image src="/images/google.svg" width={24} height={24} alt="" />
+              <span className="ml-4">Continue with Google</span>
+            </button>
             {/* <button className="btn-stroke-light btn-large w-full">
               <Image src="/images/apple.svg" width={24} height={24} alt="" />
               <span className="ml-4">Continue with Apple</span>

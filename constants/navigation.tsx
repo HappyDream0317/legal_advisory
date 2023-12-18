@@ -3,7 +3,7 @@ export const navigation = [
     title: "Air Claims",
     icon: "image-check",
     color: "#8E55EA",
-    url: "/photo-editing",
+    url: "/navigation-airclaim",
   },
   {
     title: "Bank Claims",
