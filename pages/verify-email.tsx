@@ -40,7 +40,14 @@ const VerifyEmail: NextPage = () => {
       const data = await response.json();
       if (response.ok) {
         toast.success("Verified Successfully!");
-        window.location.href = "/updates-and-faq";
+        if(localStorage.getItem("redirect_status") && localStorage.getItem("redirect_status") === "true") {
+          var redirect_url = localStorage.getItem("redirect_url");
+          localStorage.removeItem('redirect_status');
+          localStorage.removeItem('redirect_url');
+          location.href = redirect_url + "/";
+        } else {
+          window.location.href = "/updates-and-faq";
+        }
       } else {
         toast.error(data.error);
         if (data.error === "Already Verified!") {

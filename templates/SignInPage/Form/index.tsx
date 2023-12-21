@@ -31,7 +31,14 @@ const Form = ({}: FormProps) => {
     if (session.success === true) {
       localStorage.setItem("jwt_token", session.jwtToken);
       localStorage.setItem("email", session.email);
-      window.location.href = "/updates-and-faq";
+      if(localStorage.getItem("redirect_status") && localStorage.getItem("redirect_status") === "true") {
+        var redirect_url = localStorage.getItem("redirect_url");
+        localStorage.removeItem('redirect_status');
+        localStorage.removeItem('redirect_url');
+        location.href = redirect_url + "/";
+      } else {
+        window.location.href = "/updates-and-faq";
+      }
     }
   }
 

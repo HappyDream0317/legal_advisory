@@ -13,7 +13,7 @@ const Index: NextPage = () => {
         <div className=" p-6">
           <Link
             className="btn-blue w-full w-auto mt-[100px]"
-            href="/choose-types"
+            href="/airplane/main-form"
           >
             <span>Get Started</span>
           </Link>

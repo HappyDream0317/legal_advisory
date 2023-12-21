@@ -26,7 +26,7 @@ const Handler: NextPage = () => {
   ];
 
   const onClick = () => {
-    location.href = "/flight-delay/2"
+    location.href = "/sign-in"
   }
   return (
     <>

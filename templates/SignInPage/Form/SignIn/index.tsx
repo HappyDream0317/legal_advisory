@@ -29,7 +29,14 @@ const SignIn = ({ onClick }: SignInProps) => {
           if(data.user.status === false){
             window.location.href = "/verify-email";
           } else {
-            window.location.href = "/updates-and-faq";
+            if(localStorage.getItem("redirect_status") && localStorage.getItem("redirect_status") === "true") {
+              var redirect_url = localStorage.getItem("redirect_url");
+              localStorage.removeItem('redirect_status');
+              localStorage.removeItem('redirect_url');
+              location.href = redirect_url + "/";
+            } else {
+              window.location.href = "/updates-and-faq";
+            }
           }
         } else {
           toast.error(data.error);

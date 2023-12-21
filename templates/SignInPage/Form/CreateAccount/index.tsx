@@ -30,15 +30,11 @@ const CreateAccount = ({ handleTabChange }: CreateAccountProps) => {
       if (response.ok) {
         localStorage.setItem("email", email);
         window.location.href = "/verify-email";
-        // handleTabChange(0);
-        // Handle success logic here
       } else {
         toast.error(data.error);
-        // Handle error logic here
       }
     } catch (error) {
       console.log("Error creating account:", error);
-      // Handle error logic here
     }
   };
 

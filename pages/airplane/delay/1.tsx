@@ -6,7 +6,7 @@ import Field from "@/components/Field";
 const Handler: NextPage = () => {
   const [hours, setHours] = useState<Number>();
   const onClick = () => {
-    location.href = "/flight-delay/4";
+    location.href = "/airplane/delay/2";
   };
   return (
     <>

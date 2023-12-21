@@ -46,7 +46,7 @@ const Handler: NextPage = () => {
   const [reason, setReason] = useState<any>(reasons[0]);
 
   const onClick = () => {
-    location.href = "/flight-delay/3";
+    location.href = "/airplane/delay/3";
   };
   return (
     <>
