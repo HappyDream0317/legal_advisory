@@ -5,7 +5,9 @@ import Field from "@/components/Field";
 
 const Handler: NextPage = () => {
   const [hours, setHours] = useState<Number>();
-  const onClick = () => {
+  const onClick = async (e: React.FormEvent) => {
+    e.preventDefault();
+    localStorage.setItem("hours", hours);
     location.href = "/airplane/delay/2";
   };
   return (
@@ -20,7 +22,7 @@ const Handler: NextPage = () => {
             destination.
           </p>
         </div>
-        <div>
+        <form onSubmit={onClick}>
           <Field
             className="mb-4 w-[150px] m-auto mt-[20px]"
             classInput="dark:bg-n-7 dark:border-n-7 dark:focus:bg-transparent"
@@ -30,13 +32,13 @@ const Handler: NextPage = () => {
             onChange={(e: any) => setHours(e.target.value)}
             required
           />
-        </div>
-        <button
-          className="btn-blue btn-large w-full w-[150px] mt-[50px]"
-          onClick={onClick}
-        >
-          Next
-        </button>
+          <button
+            className="btn-blue btn-large w-[150px] mt-[50px]"
+            type="submit"
+          >
+            Next
+          </button>
+        </form>
       </div>
     </>
   );

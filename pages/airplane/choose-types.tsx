@@ -3,6 +3,10 @@ import Link from "next/link";
 import Icon from "@/components/Icon";
 
 const ChooseTypes: NextPage = () => {
+
+  const saveType = (type:String) => {
+    localStorage.setItem("claim_type", type);
+  }
   return (
     <>
       <div className="bg-white h-screen w-width text-center">
@@ -12,7 +16,7 @@ const ChooseTypes: NextPage = () => {
         <div className="p-6 w-[400px] m-auto mt-[50px]">
           <Link
             className="group flex items-center mb-5 p-3.5 border border-n-3 rounded-xl h6 transition-all hover:border-transparent hover:shadow-[0_0_1rem_0.25rem_rgba(0,0,0,0.04),0px_2rem_1.5rem_-1rem_rgba(0,0,0,0.12)] last:mb-0 2xl:p-2.5 lg:p-3.5 dark:border-n-5 dark:hover:border-n-7 dark:hover:bg-n-7"
-            href="/flight-delay/1"
+            href="/airplane/delay/1" onClick={() => saveType("airplane-delay")}
           >
             <div className="relative flex justify-center items-center w-15 h-15 mr-6">
               <div
@@ -35,7 +39,7 @@ const ChooseTypes: NextPage = () => {
           </Link>
           <Link
             className="group flex items-center mb-5 p-3.5 border border-n-3 rounded-xl h6 transition-all hover:border-transparent hover:shadow-[0_0_1rem_0.25rem_rgba(0,0,0,0.04),0px_2rem_1.5rem_-1rem_rgba(0,0,0,0.12)] last:mb-0 2xl:p-2.5 lg:p-3.5 dark:border-n-5 dark:hover:border-n-7 dark:hover:bg-n-7"
-            href="/photo-editing"
+            href="/photo-editing" onClick={() => saveType("airplane-cancellation")}
           >
             <div className="relative flex justify-center items-center w-15 h-15 mr-6">
               <div
@@ -58,7 +62,7 @@ const ChooseTypes: NextPage = () => {
           </Link>
           <Link
             className="group flex items-center mb-5 p-3.5 border border-n-3 rounded-xl h6 transition-all hover:border-transparent hover:shadow-[0_0_1rem_0.25rem_rgba(0,0,0,0.04),0px_2rem_1.5rem_-1rem_rgba(0,0,0,0.12)] last:mb-0 2xl:p-2.5 lg:p-3.5 dark:border-n-5 dark:hover:border-n-7 dark:hover:bg-n-7"
-            href="/photo-editing"
+            href="/photo-editing" onClick={() => saveType("airplane-loss")}
           >
             <div className="relative flex justify-center items-center w-15 h-15 mr-6">
               <div

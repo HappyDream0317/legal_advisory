@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import Field from "@/components/Field";
+import { redirect } from "next/dist/server/api-utils";
 
 type SignInProps = {
   onClick: () => void;
@@ -29,7 +30,7 @@ const SignIn = ({ onClick }: SignInProps) => {
           if(data.user.status === false){
             window.location.href = "/verify-email";
           } else {
-            if(localStorage.getItem("redirect_status") && localStorage.getItem("redirect_status") === "true") {
+            if(localStorage.getItem("redirect_url") && localStorage.getItem("redirect_status") === "true") {
               var redirect_url = localStorage.getItem("redirect_url");
               localStorage.removeItem('redirect_status');
               localStorage.removeItem('redirect_url');

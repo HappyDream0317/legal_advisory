@@ -46,6 +46,7 @@ const Handler: NextPage = () => {
   const [reason, setReason] = useState<any>(reasons[0]);
 
   const onClick = () => {
+    localStorage.setItem("delay_reason",reason.title)
     location.href = "/airplane/delay/3";
   };
   return (
@@ -55,7 +56,7 @@ const Handler: NextPage = () => {
           What, according to the airline, was the cause of the problem?
         </div>
         <div className=" p-6 w-[300px] m-auto mt-[50px]">
-          <div className="flex mb-8 space-x-8 md:pr-0">
+          <div className="flex justify-center mb-8 space-x-8 md:pr-0">
             <Select
               className="min-w-[13.125rem]"
               classButton="bg-n-3/75 dark:bg-n-6 dark:shadow-[inset_0_0_0_0.0625rem_#232627]"
@@ -66,7 +67,7 @@ const Handler: NextPage = () => {
           </div>
         </div>
         <button
-          className="btn-blue btn-large w-full w-[150px]"
+          className="btn-blue btn-large w-[150px]"
           onClick={onClick}
         >
           Next

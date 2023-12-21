@@ -38,6 +38,7 @@ export default async function handler(
       if (!isMatch) {
         return res.status(409).json({ error: "Password Incorrect!" });
       } else {
+        console.log(SECRETKEY)
         const secretKey = SECRETKEY;
         const payload = { userEmail: email };
         const token = jwt.sign(payload, secretKey, { expiresIn: "2h" });

@@ -9,6 +9,7 @@ import ForgotPassword from "./ForgotPassword";
 
 import { useSession, signIn, signOut } from "next-auth/react";
 
+
 const tabNav = ["Sign in", "Create account"];
 
 type FormProps = {};
@@ -26,15 +27,13 @@ const Form = ({}: FormProps) => {
     setActiveTab(tab);
   };
 
-  const { data: session } = useSession();
+  const { data: session, status  } = useSession();
   if (session) {
     if (session.success === true) {
       localStorage.setItem("jwt_token", session.jwtToken);
       localStorage.setItem("email", session.email);
-      if(localStorage.getItem("redirect_status") && localStorage.getItem("redirect_status") === "true") {
+      if(localStorage.getItem("redirect_status") === "true") {
         var redirect_url = localStorage.getItem("redirect_url");
-        localStorage.removeItem('redirect_status');
-        localStorage.removeItem('redirect_url');
         location.href = redirect_url + "/";
       } else {
         window.location.href = "/updates-and-faq";

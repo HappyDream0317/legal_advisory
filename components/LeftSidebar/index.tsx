@@ -56,7 +56,7 @@ const LeftSidebar = ({
       title: "Documentation",
       icon: "chat",
       color: "fill-accent-2",
-      url: "/home",
+      url: "/airplane/main-form",
     },
     // {
     //   title: "Search",
