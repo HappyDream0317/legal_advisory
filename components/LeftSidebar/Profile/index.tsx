@@ -28,14 +28,14 @@ const Profile = ({ visible }: ProfileProps) => {
             setUserName(data.data.name);
             setEmail(data.data.email);
           } else {
-            location.href = "/";
+            location.href = "/sign-in";
           }
         })
         .catch((error) => {
-          location.href = "/";
+          location.href = "/sign-in";
         });
     } else {
-      location.href = "/";
+      location.href = "/sign-in";
     }
   }, []);
 

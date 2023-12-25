@@ -42,13 +42,17 @@ const Airclaim = () => {
   }, []);
 
   const onClick = () => {
-    alert("Sdfsdf")
-  }
+    var elementToPrint = document.getElementById("claim-doc");
+    var printWindow = window.open("", "_blank");
+    printWindow.document.write(elementToPrint.innerHTML);
+    printWindow.document.close();
+    printWindow.print();
+  };
 
   return (
     <Layout hideRightSidebar={true}>
       <div>
-        <div style={{ width: "596px", margin: "auto" }}>
+        <div style={{ width: "596px", margin: "auto" }} id="claim-doc">
           <p
             style={{ fontWeight: "bold", fontSize: "20px", marginTop: "20px" }}
           >
@@ -248,7 +252,10 @@ const Airclaim = () => {
             </p>
           </div>
         </div>
-        <button className="btn-blue btn-large w-[150px] m-auto block mt-[50px] mb-[100px]" onClick={onClick}>
+        <button
+          className="btn-blue btn-large w-[150px] m-auto block mt-[50px] mb-[100px]"
+          onClick={onClick}
+        >
           Save
         </button>
       </div>
